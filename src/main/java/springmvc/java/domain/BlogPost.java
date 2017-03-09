@@ -1,17 +1,35 @@
 package springmvc.java.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Jose on 3/6/2017.
  */
+@Entity
+@Table(name = "blog_post")
 public class BlogPost {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
+
+    @Column(name = "title", nullable = false)
     private String blogTitle;
+
+    @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "publishdate", nullable = false)
     private Date publishDate;
+
+    @Column(name = "draft")
     private boolean draft;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     public Long getId() {
         return id;
@@ -51,5 +69,13 @@ public class BlogPost {
 
     public void setDraft(boolean draft) {
         this.draft = draft;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

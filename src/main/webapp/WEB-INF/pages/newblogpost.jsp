@@ -6,9 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Welcome </title>
+    <title>New Blog Post </title>
 
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/resources/css/starter-template.css" rel="stylesheet"/>
@@ -39,15 +40,24 @@
 
 <div class="container">
 
-    <h1>Java Spring MVC(JavaConfig)</h1>
-    <p>The sample application provided by Spring MVC JavaConfig udemy course</p>
-    <p>Welcome to Java Spring MVC with Java Configuration</p>
+    <h1>New Blog Post Page</h1>
 
-    <a href="${pageContext.request.contextPath}/displayUsers">Display Users with Embedded Database</a>
+    <c:if test="${not empty message}">
+        ${message} <br />
+    </c:if>
+
+    <form action="${pageContext.request.contextPath}/saveBlogPost" method="post">
+
+        <table style="width: 650px" class=""table table-striped">
+            <tr><td>Title</td><td><input type="text" name="title" required autofocus/></td></tr>
+            <tr><td>Content</td><td><textarea style="width: 400px" name="content" maxlength="4000"></textarea></td></tr>
+            <tr><td>Draft</td><td><input type="checkbox" name="draft"/></td></tr>
+            <tr><td colspan="2"><input type="submit" value="Save"/></td></tr>
+        </table>
+
+    </form>
     <br />
-    <a href="${pageContext.request.contextPath}/displayPostgresqlUsers">Display Users with Postgresql Database</a>
-    <br />
-    <a href="${pageContext.request.contextPath}/newblogpost.html">New Blog Post</a>
+    <a href="${pageContext.request.contextPath}">Back</a>
 
 </div> <!-- /container -->
 

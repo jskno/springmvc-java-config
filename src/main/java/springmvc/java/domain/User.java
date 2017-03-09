@@ -1,15 +1,30 @@
 package springmvc.java.domain;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by canogjo on 09/03/2017.
  */
+@Entity
+@Table(name = "USERR")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
+
+    @Column(name = "username", nullable = false)
     private String username;
+
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "enabled", nullable = false)
     private boolean enabled;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<BlogPost> blogPosts;
 
     public String getUsername() {

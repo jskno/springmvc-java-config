@@ -3,7 +3,6 @@ package springmvc.java.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,23 +15,22 @@ import java.util.Map;
  * Created by canogjo on 09/03/2017.
  */
 @Controller
-public class EmbeddedDatabaseController {
+public class DatabaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmbeddedDatabaseController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseController.class);
 
     @Autowired
-    @Qualifier("embedded")
-    private DataSource embedded;
+    private DataSource dataSource;
 
     private JdbcTemplate jdbcTemplate;
 
-    @RequestMapping(value="/displayUsers")
+    @RequestMapping(value="/displayPostgresqlUsers")
     public void displayUsers() {
 
-        jdbcTemplate = new JdbcTemplate(embedded);
+        jdbcTemplate = new JdbcTemplate(dataSource);
 
         List<Map<String, Object>> users = jdbcTemplate.queryForList("SELECT * FROM USER");
-        users.stream().forEach(user -> LOGGER.debug("username: " + user.get("username")));
+        users.stream().forEach(user -> LOGGER.debug("Postgresql username: " + user.get("username")));
 
     }
 }
