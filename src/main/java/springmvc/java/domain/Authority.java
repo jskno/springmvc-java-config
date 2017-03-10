@@ -12,8 +12,9 @@ import javax.persistence.*;
 public class Authority {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @SequenceGenerator(name = "authorities_id_seq", sequenceName = "authorities_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "authorities_id_seq")
+    @Column(name = "id", unique = true, nullable = false, insertable = false, updatable = false)
     private Long id;
 
     @Column(name = "username", nullable = false)

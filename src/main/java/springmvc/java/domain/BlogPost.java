@@ -11,8 +11,9 @@ import java.util.Date;
 public class BlogPost {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @SequenceGenerator(name = "blog_post_id_seq", sequenceName = "blog_post_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "blog_post_id_seq")
+    @Column(name = "id", unique = true, nullable = false, insertable = false, updatable = false)
     private Long id;
 
     @Column(name = "title", nullable = false)
@@ -21,7 +22,7 @@ public class BlogPost {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "publishdate", nullable = false)
+    @Column(name = "publishdate", nullable = true)
     private Date publishDate;
 
     @Column(name = "draft")

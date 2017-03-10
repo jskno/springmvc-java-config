@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <title>Welcome </title>
@@ -48,6 +49,8 @@
     <a href="${pageContext.request.contextPath}/displayPostgresqlUsers">Display Users with Postgresql Database</a>
     <br />
     <a href="${pageContext.request.contextPath}/newblogpost.html">New Blog Post</a>
+    <br />
+    <a href="${pageContext.request.contextPath}/blogposts">Blog Posts</a>
 
 </div> <!-- /container -->
 
@@ -56,6 +59,9 @@
         <p class="text-muted"><b>Tuna Tore 2016 Please feel free to ask me questions by sending email to tunatore@gmail.com</b></p>
         <a href="<%=request.getContextPath()%>?language=en">EN</a>
         <a href="<%=request.getContextPath()%>?language=de">DE</a>
+
+        <spring:message code="language"/>
+        <font color="green"><b><spring:message code="welcome.text"/></b></font>
     </div>
 </footer>
 

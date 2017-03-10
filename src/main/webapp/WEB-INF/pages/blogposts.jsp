@@ -10,7 +10,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title>New Blog Post </title>
+    <title>Blog Posts </title>
 
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/resources/css/starter-template.css" rel="stylesheet"/>
@@ -41,24 +41,41 @@
 
 <div class="container">
 
-    <h1>New Blog Post Page</h1>
+    <h1>Blog Posts</h1>
 
-    <c:if test="${not empty message}">
-        ${message} <br />
-        <br />
-        <a href="${pageContext.request.contextPath}/blogposts">Blog Posts</a>
+    <c:if test="${empty blogposts}">
+        No Blog Posts found <br />
     </c:if>
 
-    <form action="${pageContext.request.contextPath}/saveBlogPost" method="post">
+    <form action="${pageContext.request.contextPath}/searchbytitle" method="post">
 
         <table style="width: 650px" class="table table-striped">
-            <tr><td>Title</td><td><input type="text" name="title" required autofocus/></td></tr>
-            <tr><td>Content</td><td><textarea style="width: 400px" name="content" maxlength="4000"></textarea></td></tr>
-            <tr><td>Draft</td><td><input type="checkbox" name="draft"/></td></tr>
-            <tr><td colspan="2"><input type="submit" value="Save"/></td></tr>
+            <tr><td>Blog Title</td><td><input type="text" name="title" required autofocus/></td></tr>
+            <tr><td colspan="2"><input type="submit" value="Search"/></td></tr>
         </table>
 
     </form>
+
+    <br />
+    <a href="${pageContext.request.contextPath}/draftblogposts">Find draft Blog Posts</a>
+
+    <c:if test="${not empty blogposts}">
+
+        <table style="width: 650px" class="table table-striped">
+            <c:forEach var="blogpost" items="${blogposts}">
+                <tr><td>Blog Post Id</td><td><c:out value="${blogpost.id}"/></td></tr>
+                <tr><td>Title</td><td><c:out value="${blogpost.blogTitle}"/></td></tr>
+                <tr><td>Content</td><td><div style="white-space: pre"><c:out value="${blogpost.content}"/></div></td></tr>
+                <tr><td>Draft</td><td><c:out value="${blogpost.draft}"/></td></tr>
+                <tr><td colspan="2"></td><td></td></tr>
+                <tr><td colspan="2"></td><td></td></tr>
+            </c:forEach>
+        </table>
+
+    </c:if>
+
+    <br />
+    <a href="${pageContext.request.contextPath}/newblogpost.html">Add a new Blog Post</a>
     <br />
     <a href="${pageContext.request.contextPath}">Back</a>
 
