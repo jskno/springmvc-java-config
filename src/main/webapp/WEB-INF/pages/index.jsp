@@ -6,7 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <html>
 <head>
     <title>Welcome </title>
@@ -51,6 +54,16 @@
     <a href="${pageContext.request.contextPath}/newblogpost.html">New Blog Post</a>
     <br />
     <a href="${pageContext.request.contextPath}/blogposts">Blog Posts</a>
+    <br />
+    <a href="${pageContext.request.contextPath}/admin.html">Admin</a>
+    <br />
+
+    <security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+        <b>You are logged in as: </b><security:authentication property="principal.username"/>
+        with the role of: <security:authentication property="principal.authorities"/>
+        <br />
+        <a href="<c:url value="/logout"/>">Loggout</a>
+    </security:authorize>
 
 </div> <!-- /container -->
 

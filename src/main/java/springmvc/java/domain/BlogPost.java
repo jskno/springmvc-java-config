@@ -1,5 +1,7 @@
 package springmvc.java.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -28,6 +30,7 @@ public class BlogPost {
     @Column(name = "draft")
     private boolean draft;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

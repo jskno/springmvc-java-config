@@ -58,12 +58,15 @@
 
     <br />
     <a href="${pageContext.request.contextPath}/draftblogposts">Find draft Blog Posts</a>
+    <br />
+    <a href="${pageContext.request.contextPath}/getblogpostbyid/23">Get Blog Post By Id</a>
 
     <c:if test="${not empty blogposts}">
 
         <table style="width: 650px" class="table table-striped">
             <c:forEach var="blogpost" items="${blogposts}">
-                <tr><td>Blog Post Id</td><td><c:out value="${blogpost.id}"/></td></tr>
+                <tr><td>Blog Post Id</td>
+                    <td><a href="${pageContext.request.contextPath}/getblogpostbyid/${blogpost.id}"><c:out value="${blogpost.id}"/></a></td></tr>
                 <tr><td>Title</td><td><c:out value="${blogpost.blogTitle}"/></td></tr>
                 <tr><td>Content</td><td><div style="white-space: pre"><c:out value="${blogpost.content}"/></div></td></tr>
                 <tr><td>Draft</td><td><c:out value="${blogpost.draft}"/></td></tr>
